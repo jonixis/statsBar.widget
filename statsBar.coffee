@@ -1,8 +1,8 @@
-command: "echo $(sh ./scripts/wifi.sh)@$(osascript scripts/mail.applescript)"
+command: "echo $(sh ./scripts/wifi.sh)@$(osascript scripts/mail.applescript)@$(sh ./scripts/vmStatus.sh)"
 
 refreshFrequency: 180000 # ms
 
-location: "<span class='fontawesome'>&#xf0ac;&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp--</span>"
+location: "<span class='fontawesome'>&#xf0ac</span><span class='white'>--</span>"
 
 render: (output) ->
   """
@@ -21,35 +21,46 @@ style: """
   bottom: 2px
   height: 13
   .fontawesome
-    font: 14px FontAwesome
+    font-family: 'Font Awesome 5 Free'
+    font-size: 14px
     top: 1px
     position: relative
     left: 10px
+    margin-right: 15px
+  .fontawesomebrands
+    font-family: 'Font Awesome 5 Brands'
+    font-size: 14px
+    top: 1px
+    position: relative
+    left: 10px
+    margin-right: 15px
+  .ubuntu
+    color: #E95420
   """
 
 getWifiStatus: (status, netName, netIP) ->
   if status == "Wi-Fi"
-    return "<span class='fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>#{netName}&nbsp-&nbsp</span><span class='white'>#{netIP}&nbsp</span>"
+    return "<span class='fontawesome'>&#xf1eb</span><span class='white'>#{netName} - </span><span class='white'>#{netIP}</span>"
   if status == 'USB 10/100/1000 LAN' or status == 'Apple USB Ethernet Adapter'
-    return "<span class='yellowbg fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>#{netIP}</span>"
+    return "<span class='yellowbg fontawesome'>&#xf6ff</span><span class='white'>#{netIP}</span>"
   else
-    return "<span class='grey fontawesome'>&nbsp&nbsp&nbsp</span><span class='white'>&nbsp--</span>"
+    return "<span class='grey fontawesome'>&#xf1eb</span><span class='white'>--</span>"
 
 getMailCount: (mailCount) ->
   if !mailCount.match(null)
-    return "<span class='fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp#{mailCount}</span>"
+    return "<span class='fontawesome'>&#xf0e0</span><span class='white'>#{mailCount}</span>"
   else
-    return "<span class='grey fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp--</span>"
+    return "<span class='grey fontawesome'>&#xf0e0</span><span class='white'>--</span>"
 
 getLocation:(coords) ->
   altitudeRounded = Math.round(coords.altitude)
-  @location = "<span class='fontawesome'>&#xf0ac;&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp#{coords.longitude}°, #{coords.latitude}° - #{altitudeRounded}m a.s.l</span>"
+  @location = "<span class='fontawesome'>&#xf0ac</span><span class='white'>#{coords.longitude}°, #{coords.latitude}° - #{altitudeRounded}m a.s.l</span>"
 
-getITunesInfo: (trackName, artistName) ->
-  if !trackName.match(null)
-    return "<span class='fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp#{trackName} - #{artistName}</span>"
+getVmStatus: (vmStatus) ->
+  if (vmStatus.match(1))
+    return "<span class='fontawesomebrands ubuntu'>&#xf7df</span><span class='white'>On</span>"
   else
-    return "<span class='grey fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp--</span>"
+    return "<span class='fontawesomebrands'>&#xf7df</span><span class='white'>Off</span>"
 
 update: (output, domEl) ->
 
@@ -59,8 +70,7 @@ update: (output, domEl) ->
   netName = values[1]
   netIP = values[2]
   mailCount = values[3]
-  trackName = values[4]
-  artistName = values[5]
+  vmStatus = values[4]
 
   window.geolocation.getCurrentPosition (location) =>
     coords = location.position.coords
@@ -68,6 +78,8 @@ update: (output, domEl) ->
 
   # create an HTML string to be displayed by the widget
   htmlString =
+    "<span>&nbsp&nbsp|</span>" +
+    @getVmStatus(vmStatus) +
     "<span>&nbsp&nbsp|</span>" +
     @getMailCount(mailCount) +
     "<span>&nbsp&nbsp|</span>" +

@@ -14,15 +14,24 @@ style: """
   bottom: 2px
   height: 13
   .fontawesome
-    font: 14px FontAwesome
+    font-family: 'Font Awesome 5 Free'
+    font-size: 14px
     top: 1px
     position: relative
     left: 10px
+    margin-right: 15px
+  .fontawesomebrands
+    font-family: 'Font Awesome 5 Brands'
+    font-size: 14px
+    top: 1px
+    position: relative
+    left: 10px
+    margin-right: 15px
   """
 
 getITunesInfo: (trackName, artistName) ->
   if !trackName.match(null)
-    return "<span class='fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp#{trackName} - #{artistName}</span>"
+    return "<span class='fontawesomebrands'>&#xf3b5</span><span class='white'>#{trackName} - #{artistName}</span>"
   else
     return ""
 
