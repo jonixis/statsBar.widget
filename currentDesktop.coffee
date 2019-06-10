@@ -2,6 +2,13 @@ command: "echo $(x=$(/usr/local/bin/chunkc tiling::query -d id);echo $(/usr/loca
 
 refreshFrequency: 1000
 
+iconTerminal: "&#xf120"
+iconCode: "&#xf121"
+iconFireFox: "&#xf269"
+iconFolder: "&#xf07b"
+iconMusic: "&#xf144"
+iconMail: "&#xf0e0"
+
 render: (output) ->
   values = output.split(',')
   spaces = values[0].split(' ')
@@ -14,14 +21,28 @@ render: (output) ->
   for i in [0..spaces.length - 1]
     icon = ""
     switch spaces[i]
-        when '1' then icon = "./assets/icons/utilities-terminal-symbolic.svg"
-        when '2' then icon = "./assets/icons/code.svg"
-        when '3' then icon = "./assets/icons/firefox-symbolic.svg"
-        when '4' then icon = "./assets/icons/system-file-manager-symbolic.svg"
-        when '5' then icon = "./assets/icons/multimedia-audio-player.svg"
-        when '6' then icon = "./assets/icons/mailbox.svg"
-        else icon = "./assets/icons/utilities-terminal-symbolic.svg"
-    htmlString += "<li><img id=\"desktop#{spaces[i]}\" src=\"#{icon}\" /></li>"
+        when '1'
+          icon = @iconTerminal
+          cssClass = "fontawesome"
+        when '2'
+          icon = @iconCode
+          cssClass = "fontawesome"
+        when '3'
+          icon = @iconFireFox
+          cssClass = "fontawesomebrands"
+        when '4'
+          icon = @iconFolder
+          cssClass = "fontawesome"
+        when '5'
+          icon = @iconMusic
+          cssClass = "fontawesome"
+        when '6'
+          icon = @iconMail
+          cssClass = "fontawesome"
+        else
+          icon = @iconTerminal
+          cssClass = "fontawesome"
+    htmlString += "<li><span id=\"desktop#{spaces[i]}\" class='#{cssClass}'>#{icon}</span></li>"
 
   htmlString += """
       <ul>
@@ -29,27 +50,37 @@ render: (output) ->
   """
 
 style: """
-  bottom: 0px;
+  left: 0px
+  bottom: 4px
   position: absolute
-  font: 3px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
-  color: #aaa
-  font-weight: 700
+  font-family: 'Font Awesome 5 Free'
+  font-size: 14px
 
   ul
     list-style: none
-    margin: 0 0 0 10px
+    margin: 0 0 0 0
     padding: 0
 
   li
     display: inline
-    margin: 0 8px
+    margin: 0px 10px
 
-    img
-      max-height: 20px
-      max-width: 20px
+  span.active
+    color: #80bc4f
 
-  img.active
-    border-top: 2px solid #80bc4f
+  .fontawesomebrands
+    font-family: 'Font Awesome 5 Brands'
+    font-size: 14px
+    top: 1px
+    position: relative
+    left: 10px
+
+  .fontawesome
+    font-family: 'Font Awesome 5 Free'
+    font-size: 14px
+    top: 1px
+    position: relative
+    left: 10px
 """
 
 update: (output, domEl) ->
@@ -61,19 +92,33 @@ update: (output, domEl) ->
   for i in [0..spaces.length - 1]
     icon = ""
     switch spaces[i]
-        when '1' then icon = "./assets/icons/utilities-terminal-symbolic.svg"
-        when '2' then icon = "./assets/icons/code.svg"
-        when '3' then icon = "./assets/icons/firefox-symbolic.svg"
-        when '4' then icon = "./assets/icons/system-file-manager-symbolic.svg"
-        when '5' then icon = "./assets/icons/multimedia-audio-player.svg"
-        when '6' then icon = "./assets/icons/mailbox.svg"
-        else icon = "./assets/icons/utilities-terminal-symbolic.svg"
-    htmlString += "<li><img id=\"desktop#{spaces[i]}\" src=\"#{icon}\" /></li>"
+        when '1'
+          icon = @iconTerminal
+          cssClass = "fontawesome"
+        when '2'
+          icon = @iconCode
+          cssClass = "fontawesome"
+        when '3'
+          icon = @iconFireFox
+          cssClass = "fontawesomebrands"
+        when '4'
+          icon = @iconFolder
+          cssClass = "fontawesome"
+        when '5'
+          icon = @iconMusic
+          cssClass = "fontawesome"
+        when '6'
+          icon = @iconMail
+          cssClass = "fontawesome"
+        else
+          icon = @iconTerminal
+          cssClass = "fontawesome"
+    htmlString += "<li><span id=\"desktop#{spaces[i]}\" class='#{cssClass}'>#{icon}</span></li>"
 
   if ($(domEl).find('.currentDesktop-container').attr('data-count') != spaces.length.toString())
      $(domEl).find('.currentDesktop-container').attr('data-count', "#{spaces.length}")
      $(domEl).find('ul').html(htmlString)
-     $(domEl).find("img#desktop#{space}").addClass('active')
+     $(domEl).find("span#desktop#{space}").addClass('active')
   else
-    $(domEl).find('img.active').removeClass('active')
-    $(domEl).find("img#desktop#{space}").addClass('active')
+    $(domEl).find('span.active').removeClass('active')
+    $(domEl).find("span#desktop#{space}").addClass('active')

@@ -17,7 +17,7 @@ afterRender: (domEl) ->
       @refresh()
 
 style: """
-  right: 18px
+  right: 10px
   bottom: 2px
   height: 13
   .fontawesome
@@ -48,9 +48,9 @@ getWifiStatus: (status, netName, netIP) ->
 
 getMailCount: (mailCount) ->
   if !mailCount.match(null)
-    return "<span class='fontawesome'>&#xf0e0</span><span class='white'>#{mailCount}</span>"
+    return "<span class='fontawesome'>&#xf01c</span><span class='white'>#{mailCount}</span>"
   else
-    return "<span class='grey fontawesome'>&#xf0e0</span><span class='white'>--</span>"
+    return "<span class='grey fontawesome'>&#xf01c</span><span class='white'>--</span>"
 
 getLocation:(coords) ->
   altitudeRounded = Math.round(coords.altitude)
