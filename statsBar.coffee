@@ -2,7 +2,7 @@ command: "echo $(sh ./scripts/wifi.sh)@$(osascript scripts/mail.applescript)"
 
 refreshFrequency: 180000 # ms
 
-position: "<span class='fontawesome'>&#xf0ac;&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp--</span>"
+location: "<span class='fontawesome'>&#xf0ac;&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp--</span>"
 
 render: (output) ->
   """
@@ -13,7 +13,7 @@ render: (output) ->
 afterRender: (domEl) ->
     window.geolocation.getCurrentPosition (location) =>
       coords = location.position.coords
-      @updateLocation(coords)
+      @getLocation(coords)
       @refresh()
 
 style: """
@@ -41,9 +41,9 @@ getMailCount: (mailCount) ->
   else
     return "<span class='grey fontawesome'>&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp--</span>"
 
-updateLocation:(coords) ->
+getLocation:(coords) ->
   altitudeRounded = Math.round(coords.altitude)
-  @position = "<span class='fontawesome'>&#xf0ac;&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp#{coords.longitude}°, #{coords.latitude}° - #{altitudeRounded}m a.s.l</span>"
+  @location = "<span class='fontawesome'>&#xf0ac;&nbsp&nbsp&nbsp&nbsp;</span><span class='white'>&nbsp#{coords.longitude}°, #{coords.latitude}° - #{altitudeRounded}m a.s.l</span>"
 
 getITunesInfo: (trackName, artistName) ->
   if !trackName.match(null)
@@ -64,7 +64,7 @@ update: (output, domEl) ->
 
   window.geolocation.getCurrentPosition (location) =>
     coords = location.position.coords
-    @updateLocation(coords)
+    @getLocation(coords)
 
   # create an HTML string to be displayed by the widget
   htmlString =
@@ -73,6 +73,6 @@ update: (output, domEl) ->
     "<span>&nbsp&nbsp|</span>" +
     @getWifiStatus(netStatus, netName, netIP) +
     "<span>&nbsp&nbsp|</span>" +
-    @position
+    @location
 
   $(domEl).find('.statsBar').html(htmlString)
