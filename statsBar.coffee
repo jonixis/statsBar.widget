@@ -1,4 +1,4 @@
-command: "echo $(sh ./scripts/wifi.sh)@$(osascript scripts/mail.AppleScript)"
+command: "echo $(sh ./scripts/wifi.sh)@$(osascript scripts/mail.applescript)"
 
 refreshFrequency: 180000 # ms
 

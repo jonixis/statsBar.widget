@@ -1,4 +1,4 @@
-command: "echo $(osascript scripts/iTunes.AppleScript)"
+command: "echo $(osascript scripts/itunes.applescript)"
 
 refreshFrequency: 8000 # ms
 
