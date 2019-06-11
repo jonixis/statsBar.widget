@@ -44,13 +44,13 @@ getWifiStatus: (status, netName, netIP) ->
   if status == 'USB 10/100/1000 LAN' or status == 'Apple USB Ethernet Adapter'
     return "<span class='yellowbg fontawesome'>&#xf6ff</span><span class='white'>#{netIP}</span>"
   else
-    return "<span class='grey fontawesome'>&#xf1eb</span><span class='white'>--</span>"
+    return "<span class='white fontawesome'>&#xf1eb</span><span class='white'>--</span>"
 
 getMailCount: (mailCount) ->
   if !mailCount.match(null)
     return "<span class='fontawesome'>&#xf01c</span><span class='white'>#{mailCount}</span>"
   else
-    return "<span class='grey fontawesome'>&#xf01c</span><span class='white'>--</span>"
+    return "<span class='white fontawesome'>&#xf01c</span><span class='white'>--</span>"
 
 getLocation:(coords) ->
   altitudeRounded = Math.round(coords.altitude)
@@ -58,9 +58,9 @@ getLocation:(coords) ->
 
 getVmStatus: (vmStatus) ->
   if (vmStatus.match(1))
-    return "<span class='fontawesomebrands ubuntu'>&#xf7df</span><span class='white'>On</span>"
+    return "<span class='fontawesomebrands ubuntu'>&#xf7df</span>"
   else
-    return "<span class='fontawesomebrands'>&#xf7df</span><span class='white'>Off</span>"
+    return "<span class='fontawesomebrands white'>&#xf7df</span>"
 
 update: (output, domEl) ->
 
@@ -80,7 +80,7 @@ update: (output, domEl) ->
   htmlString =
     "<span>&nbsp&nbsp|</span>" +
     @getVmStatus(vmStatus) +
-    "<span>&nbsp&nbsp|</span>" +
+    "<span>&nbsp|</span>" +
     @getMailCount(mailCount) +
     "<span>&nbsp&nbsp|</span>" +
     @getWifiStatus(netStatus, netName, netIP) +
