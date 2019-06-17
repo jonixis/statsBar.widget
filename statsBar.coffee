@@ -18,7 +18,7 @@ afterRender: (domEl) ->
 
 style: """
   right: 10px
-  bottom: 2px
+  bottom: 4px
   height: 13
   .fontawesome
     font-family: 'Font Awesome 5 Free'

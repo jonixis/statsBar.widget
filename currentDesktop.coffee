@@ -45,13 +45,13 @@ render: (output) ->
     htmlString += "<li><span id=\"desktop#{spaces[i]}\" class='#{cssClass}'>#{icon}</span></li>"
 
   htmlString += """
-      <ul>
+      </ul>
     </div>
   """
 
 style: """
   left: 0px
-  bottom: 4px
+  bottom: 6px
   position: absolute
   font-family: 'Font Awesome 5 Free'
   font-size: 14px
