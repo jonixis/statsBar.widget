@@ -1,4 +1,4 @@
-command: "echo $(sh ./scripts/wifi.sh)@$(osascript scripts/mail.applescript)@$(sh ./scripts/vmStatus.sh)"
+command: "echo $(sh ./statsBar.widget/scripts/wifi.sh)@$(osascript ./statsBar.widget/scripts/mail.applescript)@$(sh ./statsBar.widget/scripts/vmStatus.sh)"
 
 refreshFrequency: 180000 # ms
 
@@ -6,7 +6,7 @@ location: "<span class='fontawesome'>&#xf0ac</span><span class='white'>--</span>
 
 render: (output) ->
   """
-    <link rel="stylesheet" type="text/css" href="./assets/colors.css">
+    <link rel="stylesheet" type="text/css" href="./statsBar.widget/assets/colors.css">
     <div class="statsBar"></div>
   """
 
