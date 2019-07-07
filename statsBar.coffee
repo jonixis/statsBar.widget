@@ -1,6 +1,8 @@
 command: "echo $(sh ./statsBar.widget/scripts/wifi.sh)@$(osascript ./statsBar.widget/scripts/mail.applescript)@$(sh ./statsBar.widget/scripts/vmStatus.sh)"
 
-refreshFrequency: 180000 # ms
+targetRefreshFrequency: 60000 # in ms
+
+refreshFrequency: @targetRefreshFrequency
 
 location: "<span class='fontawesome'>&#xf0ac</span><span class='white'>--</span>"
 
@@ -9,12 +11,6 @@ render: (output) ->
     <link rel="stylesheet" type="text/css" href="./statsBar.widget/assets/colors.css">
     <div class="statsBar"></div>
   """
-
-afterRender: (domEl) ->
-    window.geolocation.getCurrentPosition (location) =>
-      coords = location.position.coords
-      @getLocation(coords)
-      @refresh()
 
 style: """
   right: 10px
@@ -52,15 +48,36 @@ getMailCount: (mailCount) ->
   else
     return "<span class='white fontawesome'>&#xf01c</span><span class='white'>--</span>"
 
-getLocation:(coords) ->
-  altitudeRounded = Math.round(coords.altitude)
-  @location = "<span class='fontawesome'>&#xf0ac</span><span class='white'>#{coords.longitude}°, #{coords.latitude}° - #{altitudeRounded}m a.s.l</span>"
-
 getVmStatus: (vmStatus) ->
   if (vmStatus.match(1))
     return "<span class='fontawesomebrands ubuntu'>&#xf7df</span>"
   else
     return "<span class='fontawesomebrands white'>&#xf7df</span>"
+
+getTime: () ->
+  date = new Date
+  @syncWithTime(date)
+
+  hours = date.getHours()
+  minutes = date.getMinutes()
+  minutes = if minutes < 10 then '0'+minutes else minutes
+
+  return "<span class='fontawesome'>&#xf017</span><span class='white'>#{hours}:#{minutes}</span>"
+
+syncWithTime: (date) ->
+  seconds = date.getSeconds()
+  nextFullMinute = 60 - seconds
+
+  if (nextFullMinute > 1 && nextFullMinute < 59)
+    @refreshFrequency = nextFullMinute * 1000
+  else if (@refreshFrequency != @targetRefreshFrequency)
+    @refreshFrequency = @targetRefreshFrequency
+
+updateLocation: () ->
+  window.geolocation.getCurrentPosition (location) =>
+    coords = location.position.coords
+    altitudeRounded = Math.round(coords.altitude)
+    @location = "<span class='fontawesome'>&#xf0ac</span><span class='white'>#{coords.longitude}°, #{coords.latitude}° - #{altitudeRounded}m a.s.l</span>"
 
 update: (output, domEl) ->
 
@@ -72,9 +89,7 @@ update: (output, domEl) ->
   mailCount = values[3]
   vmStatus = values[4]
 
-  window.geolocation.getCurrentPosition (location) =>
-    coords = location.position.coords
-    @getLocation(coords)
+  @updateLocation()
 
   # create an HTML string to be displayed by the widget
   htmlString =
@@ -85,6 +100,8 @@ update: (output, domEl) ->
     "<span>&nbsp&nbsp|</span>" +
     @getWifiStatus(netStatus, netName, netIP) +
     "<span>&nbsp&nbsp|</span>" +
-    @location
+    @location +
+    "<span>&nbsp&nbsp|</span>" +
+    @getTime()
 
   $(domEl).find('.statsBar').html(htmlString)
