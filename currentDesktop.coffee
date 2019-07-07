@@ -1,4 +1,4 @@
-command: "echo $(x=$(/usr/local/bin/chunkc tiling::query -d id);echo $(/usr/local/bin/chunkc tiling::query -D $(/usr/local/bin/chunkc tiling::query -m id))\",$x\")"
+command: "echo $(/usr/local/bin/yabai -m query --spaces --display | /usr/local/bin/jq '.[].index')','$(/usr/local/bin/yabai -m query --spaces --space | /usr/local/bin/jq '.index')"
 
 refreshFrequency: 1000
 
