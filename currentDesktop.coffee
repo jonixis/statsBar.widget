@@ -1,6 +1,6 @@
 command: "echo $(/usr/local/bin/yabai -m query --spaces --display | /usr/local/bin/jq '.[].index')','$(/usr/local/bin/yabai -m query --spaces --space | /usr/local/bin/jq '.index')"
 
-refreshFrequency: 1000
+refreshFrequency: false
 
 iconTerminal: "&#xf120"
 iconCode: "&#xf121"
