@@ -6,7 +6,7 @@ render: (output) ->
 style: """
   background-color: #2d2d2d;
   width: 100%;
-  bottom: 0px;
+  top: 0px;
   right: 2px;
   left 0px;
   height: 23px

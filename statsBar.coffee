@@ -14,7 +14,7 @@ render: (output) ->
 
 style: """
   right: 10px
-  bottom: 4px
+  top: 2px
   height: 13
   .fontawesome
     font-family: 'Font Awesome 5 Free'
