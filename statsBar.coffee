@@ -77,7 +77,7 @@ updateLocation: () ->
   window.geolocation.getCurrentPosition (location) =>
     coords = location.position.coords
     altitudeRounded = Math.round(coords.altitude)
-    @location = "<span class='fontawesome'>&#xf0ac</span><span class='white'>#{coords.longitude}°, #{coords.latitude}° - #{altitudeRounded}m a.s.l</span>"
+    @location = "<span class='fontawesome'>&#xf0ac</span><span class='white'>#{altitudeRounded}m a.s.l</span>"
 
 update: (output, domEl) ->
 
