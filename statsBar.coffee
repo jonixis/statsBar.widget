@@ -58,14 +58,10 @@ getTime: () ->
   date = new Date
   @syncWithTime(date)
 
-  hours = date.getHours()
-  minutes = date.getMinutes()
+  options = { hour: '2-digit', minute: '2-digit', weekday: 'short', day: '2-digit', month: 'short'}
+  dateString = date.toLocaleString('en-CH', options)
 
-  dateString = date.toDateString()
-
-  minutes = if minutes < 10 then '0' + minutes else minutes
-
-  return "<span class='fontawesome'>&#xf017</span><span class='white'>#{hours}:#{minutes} - #{dateString}</span>"
+  return "<span class='fontawesome'>&#xf017</span><span class='white'>#{dateString}</span>"
 
 syncWithTime: (date) ->
   seconds = date.getSeconds()
