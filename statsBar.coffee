@@ -60,9 +60,12 @@ getTime: () ->
 
   hours = date.getHours()
   minutes = date.getMinutes()
-  minutes = if minutes < 10 then '0'+minutes else minutes
 
-  return "<span class='fontawesome'>&#xf017</span><span class='white'>#{hours}:#{minutes}</span>"
+  dateString = date.toDateString()
+
+  minutes = if minutes < 10 then '0' + minutes else minutes
+
+  return "<span class='fontawesome'>&#xf017</span><span class='white'>#{hours}:#{minutes} - #{dateString}</span>"
 
 syncWithTime: (date) ->
   seconds = date.getSeconds()
