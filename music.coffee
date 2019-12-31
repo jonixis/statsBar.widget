@@ -1,11 +1,11 @@
-command: "echo $(osascript statsBar.widget/scripts/itunes.applescript)"
+command: "echo $(osascript statsBar.widget/scripts/music.applescript)"
 
 refreshFrequency: 8000 # ms
 
 render: (output) ->
   """
     <link rel="stylesheet" type="text/css" href="./assets/colors.css">
-    <div class="iTunes"></div>
+    <div class="music"></div>
   """
 
 style: """
@@ -29,7 +29,7 @@ style: """
     margin-right: 15px
   """
 
-getITunesInfo: (trackName, artistName) ->
+getMusicInfo: (trackName, artistName) ->
   if !trackName.match(null)
     return "<span class='fontawesomebrands'>&#xf3b5</span><span class='white'>#{trackName} - #{artistName}</span>"
   else
@@ -45,6 +45,6 @@ update: (output, domEl) ->
 
   # create an HTML string to be displayed by the widget
   htmlString =
-    @getITunesInfo(trackName, artistName)
+    @getMusicInfo(trackName, artistName)
 
-  $(domEl).find('.iTunes').html(htmlString)
+  $(domEl).find('.music').html(htmlString)
