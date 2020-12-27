@@ -8,6 +8,7 @@ iconFireFox: "&#xf269"
 iconFolder: "&#xf07b"
 iconMusic: "&#xf144"
 iconMail: "&#xf0e0"
+iconCalendar: "&#xf073"
 
 render: (output) ->
   values = output.split(',')
@@ -38,6 +39,9 @@ render: (output) ->
           cssClass = "fontawesome"
         when '6'
           icon = @iconMail
+          cssClass = "fontawesome"
+        when '7'
+          icon = @iconCalendar
           cssClass = "fontawesome"
         else
           icon = @iconTerminal
