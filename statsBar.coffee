@@ -1,4 +1,4 @@
-command: "echo $(sh ./statsBar.widget/scripts/wifi.sh)@$(osascript ./statsBar.widget/scripts/mail.applescript)@$(sh ./statsBar.widget/scripts/vmStatus.sh)"
+command: "echo $(sh ./statsBar.widget/scripts/wifi.sh)@$(osascript ./statsBar.widget/scripts/mail.applescript)" # @$(sh ./statsBar.widget/scripts/vmStatus.sh)"
 
 targetRefreshFrequency: 60000 # in ms
 
@@ -92,8 +92,8 @@ update: (output, domEl) ->
 
   # create an HTML string to be displayed by the widget
   htmlString =
-    "<span>&nbsp&nbsp|</span>" +
-    @getVmStatus(vmStatus) +
+    # "<span>&nbsp&nbsp|</span>" +
+    # @getVmStatus(vmStatus) +
     "<span>&nbsp|</span>" +
     @getMailCount(mailCount) +
     "<span>&nbsp&nbsp|</span>" +
