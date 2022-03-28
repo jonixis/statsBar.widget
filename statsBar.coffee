@@ -13,18 +13,18 @@ render: (output) ->
   """
 
 style: """
-  right: 10px
-  top: 2px
+  right: 15px
+  top: 7px
   height: 13
   .fontawesome
-    font-family: 'Font Awesome 5 Free'
+    font-family: 'Font Awesome 6 Free'
     font-size: 14px
     top: 1px
     position: relative
     left: 10px
     margin-right: 15px
   .fontawesomebrands
-    font-family: 'Font Awesome 5 Brands'
+    font-family: 'Font Awesome 6 Brands'
     font-size: 14px
     top: 1px
     position: relative

@@ -1,4 +1,4 @@
-command: "echo $(/usr/local/bin/yabai -m query --spaces --display | /usr/local/bin/jq '.[].index')','$(/usr/local/bin/yabai -m query --spaces --space | /usr/local/bin/jq '.index')"
+command: "echo $(/opt/homebrew/bin/yabai -m query --spaces --display | /opt/homebrew/bin/jq '.[].index')','$(/opt/homebrew/bin/yabai -m query --spaces --space | /opt/homebrew/bin/jq '.index')"
 
 refreshFrequency: false
 
@@ -55,9 +55,9 @@ render: (output) ->
 
 style: """
   left: 0px
-  top: 4px
+  top: 7px
   position: absolute
-  font-family: 'Font Awesome 5 Free'
+  font-family: 'Font Awesome 6 Free'
   font-size: 14px
 
   ul
@@ -73,14 +73,14 @@ style: """
     color: #80bc4f
 
   .fontawesomebrands
-    font-family: 'Font Awesome 5 Brands'
+    font-family: 'Font Awesome 6 Brands'
     font-size: 14px
     top: 1px
     position: relative
     left: 10px
 
   .fontawesome
-    font-family: 'Font Awesome 5 Free'
+    font-family: 'Font Awesome 6 Free'
     font-size: 14px
     top: 1px
     position: relative
