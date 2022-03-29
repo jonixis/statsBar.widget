@@ -10,8 +10,8 @@ render: (output) ->
 
 style: """
   width: 100%
-  top: 7px
-  left: 0px;
+  top: 6px
+  left: 250px;
   height: 13
   .fontawesome
     font-family: 'Font Awesome 6 Free'
@@ -31,7 +31,14 @@ style: """
 
 getMusicInfo: (trackName, artistName) ->
   if !trackName.match(null)
-    return "<span class='fontawesomebrands'>&#xf3b5</span><span class='white'>#{trackName} - #{artistName}</span>"
+    console.log(artistName)
+    console.log(trackName)
+    if (artistName.match(""))
+      trackString = trackName
+    else
+      trackString = trackName + " - " + artistName
+    console.log(trackString)
+    return "<span>&nbsp&nbsp|</span><span class='fontawesomebrands'>&#xf3b5</span><span class='white'>#{trackString}</span>"
   else
     return ""
 

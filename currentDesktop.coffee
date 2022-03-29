@@ -55,7 +55,7 @@ render: (output) ->
 
 style: """
   left: 0px
-  top: 7px
+  top: 8px
   position: absolute
   font-family: 'Font Awesome 6 Free'
   font-size: 14px
