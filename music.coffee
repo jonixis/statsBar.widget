@@ -31,13 +31,10 @@ style: """
 
 getMusicInfo: (trackName, artistName) ->
   if !trackName.match(null)
-    console.log(artistName)
-    console.log(trackName)
-    if (artistName.match(""))
+    if (artistName.length <= 1)
       trackString = trackName
     else
       trackString = trackName + " - " + artistName
-    console.log(trackString)
     return "<span>&nbsp&nbsp|</span><span class='fontawesomebrands'>&#xf3b5</span><span class='white'>#{trackString}</span>"
   else
     return ""
