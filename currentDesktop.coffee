@@ -3,6 +3,7 @@ command: "echo $(/opt/homebrew/bin/yabai -m query --spaces --display | /opt/home
 refreshFrequency: false
 
 iconTerminal: "&#xf120"
+iconChrome: "&#xf268"
 iconCode: "&#xf121"
 iconFireFox: "&#xf269"
 iconFolder: "&#xf07b"
@@ -26,21 +27,24 @@ render: (output) ->
           icon = @iconTerminal
           cssClass = "fontawesome"
         when '2'
+          icon = @iconChrome
+          cssClass = "fontawesomebrands"
+        when '3'
           icon = @iconCode
           cssClass = "fontawesome"
-        when '3'
+        when '4'
           icon = @iconFireFox
           cssClass = "fontawesomebrands"
-        when '4'
+        when '5'
           icon = @iconFolder
           cssClass = "fontawesome"
-        when '5'
+        when '6'
           icon = @iconMusic
           cssClass = "fontawesome"
-        when '6'
+        when '7'
           icon = @iconMail
           cssClass = "fontawesome"
-        when '7'
+        when '8'
           icon = @iconCalendar
           cssClass = "fontawesome"
         else

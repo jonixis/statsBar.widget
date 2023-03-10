@@ -11,7 +11,7 @@ render: (output) ->
 style: """
   width: 100%
   top: 6px
-  left: 250px;
+  left: 290px;
   height: 13
   .fontawesome
     font-family: 'Font Awesome 6 Free'
